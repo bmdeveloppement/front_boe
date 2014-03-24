@@ -1,0 +1,18 @@
+application:
+    domain: front.boe.dev
+    url_back_boe: 'http://back.boe.dev'
+
+cache:
+    'cache.type': 'memory'
+
+flask:
+    debug: False
+    profiling: False
+
+cache:
+    'cache.type': 'memory'
+
+flask:
+    debug: False
+    profiling: False
+    server_side_sessions: True

@@ -1,5 +1,3 @@
-src/config/config.yml
-src/config/config.test.yml
 *.swp
 *~
 *.kdev4
