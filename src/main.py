@@ -11,7 +11,9 @@ from lib.boe_app import BoeFlaskApplication
 
 sys.path.append(path.dirname(__file__))
 Configurator(os.path.dirname(__file__))
-application = BoeFlaskApplication(__name__)
+application = BoeFlaskApplication(__name__,
+                                  template_folder='templates',
+                                  static_folder='public')
 
 @application.route('/')
 def root():
