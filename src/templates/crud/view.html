@@ -2,7 +2,50 @@
 
 {% block content %}
     <div class="page-header">
-        <h3>This is my page title</h3>
+        <h3 class="float-left">{{ view|capitalize|replace('-', ' ') }} Details</h3>
+        <a class="btn btn-warning float-right" href="/{{ view }}">Return to {{ view|replace('-', ' ') }} list</a>
+        <div class="clear"></div>
     </div>
-    {{ item }}
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for key in keys %}
+                    <tr>
+                        <td>
+                            {{ translations[loop.index0] }}
+                        </td>
+                        <td>
+                            {% if item[key] is string or item[key] is number %}
+                                {{ item[key] }}
+                            {% else %}
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Value</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for subkey, subvalue in item[key].items() %}
+                                            <tr>
+                                                <td>{{ subkey }}</td>
+                                                <td>{{ subvalue }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock content %}

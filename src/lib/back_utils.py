@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import json
 import requests
 
@@ -8,8 +9,8 @@ from lib.http_utils import load_response
 
 class BackUtils(Singleton):
     def __init__(self):
-    	"""Initilize mandatories attributes"""
-    	self.url_back_boe = Configurator().get_setting('application')['url_back_boe']
+        """Initilize mandatories attributes"""
+        self.url_back_boe = Configurator().get_setting('application')['url_back_boe']
 
     @load_response
     def get(self, key, reference_id):

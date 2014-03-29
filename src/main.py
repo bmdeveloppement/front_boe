@@ -17,13 +17,15 @@ application = BoeFlaskApplication(__name__,
 
 @application.route('/')
 def root():
-    return redirect(url_for('client.list'))
+    return redirect(url_for('point_of_sale.list'))
 
 def import_blueprints():
     """Import BPs"""
     from action.client import client_bp
+    from action.point_of_sale import point_of_sale_bp
 
     application.register_blueprint(client_bp)
+    application.register_blueprint(point_of_sale_bp)
 
 @application.before_request
 def authentify():

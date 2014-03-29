@@ -2,33 +2,30 @@
 
 {% block content %}
     <div class="page-header">
-        <h3>This is my page title</h3>
+        <h3 class="float-left">{{ view|capitalize|replace('-', ' ') }} List</h3>
+        <a class="btn btn-success float-right" href="/{{ view }}/add">Add a new {{ view|replace('-', ' ') }}</a>
+        <div class="clear"></div>
     </div>
 
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Company Name</th>
-                    <th>Email Address</th>
-                    <th>Actions</th>
+                    {% for translation in translations %}
+                        <th>{{ translation }}</th>
+                    {% endfor %}
+                    <th class="center">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 {% for item in items %}
                     <tr>
-                        <td>
-                            {{ item['id'] }}
-                        </td>
-                        <td>
-                            {{ item['company_name'] }}
-                        </td>
-                        <td>
-                            {{ item['email_address'] }}
-                        </td>
-                        <td>
-                            Edit
+                        {% for key in keys %}
+                            <th>{{ item[key] }}</th>
+                        {% endfor %}
+                        <td class="center">
+                            <a class="btn btn-xs btn-primary" href="/{{ view }}/edit/{{ item['id'] }}">Edit</a>
+                            <a class="btn btn-xs btn-info" href="/{{ view }}/{{ item['id'] }}">Details</a>
                         </td>
                     </tr>
                 {% endfor %}
