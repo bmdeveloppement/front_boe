@@ -12,8 +12,11 @@ translations = ['#', 'Delivery Price', 'Address', 'Zip Code', 'City', 'Additiona
 def get(reference_id):
     """Get full item"""
     item = BackUtils().get_full('point_of_sale', reference_id)
+
+    # Update keys to show client details
     keys = ['id', 'client', 'delivery_price', 'address', 'zip_code', 'city', 'additional_data']
     translations = ['#', 'Client', 'Delivery Price', 'Address', 'Zip Code', 'City', 'Additional Data']
+    
     return render_template('crud/view.html', view=view, item=item,
                            keys=keys, translations=translations)
 
@@ -42,8 +45,6 @@ def add():
         for key in keys:
             if key is not 'id':
                 data[key] = getattr(form, key).data
-        print data
         item = BackUtils().add(view, data)
-        print item
         return redirect(url_for('%s.list' % view))
     return render_template('%s/add.html' % view, view=view, form=form)
