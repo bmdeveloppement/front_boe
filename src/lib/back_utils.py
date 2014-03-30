@@ -29,3 +29,15 @@ class BackUtils(Singleton):
         """Get a list by key"""
         uri = '%s/%s/' % (self.url_back_boe, key)
         return requests.post(uri, data='')
+
+    @load_response
+    def add(self, key, data):
+        """Add a new item"""
+        uri = '%s/%s/' % (self.url_back_boe, key)
+        return requests.put(uri, data=data)
+
+    @load_response
+    def edit(self, key, reference_id, data):
+        """Add a new item"""
+        uri = '%s/%s/%s' % (self.url_back_boe, key, reference_id)
+        return requests.post(uri, data=data)

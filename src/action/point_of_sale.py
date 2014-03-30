@@ -4,8 +4,8 @@ from lib.back_utils import BackUtils
 
 view = 'point-of-sale'
 point_of_sale_bp = Blueprint(view, __name__, url_prefix='/%s' % view)
-keys = ['id', 'client_id', 'delivery_price', 'address', 'zip_code', 'city', 'additional_data']
-translations = ['#', 'Client', 'Delivery Price', 'Address', 'Zip Code', 'City', 'Additional Data']
+keys = ['id', 'delivery_price', 'address', 'zip_code', 'city', 'additional_data']
+translations = ['#', 'Delivery Price', 'Address', 'Zip Code', 'City', 'Additional Data']
 
 @point_of_sale_bp.route('/<int:reference_id>')
 def get(reference_id):

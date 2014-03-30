@@ -3,7 +3,7 @@
 {% block content %}
     <div class="page-header">
         <h3 class="float-left">{{ view|capitalize|replace('-', ' ') }} List</h3>
-        <a class="btn btn-success float-right" href="/{{ view }}/add">Add a new {{ view|replace('-', ' ') }}</a>
+        <a class="btn btn-danger float-right" href="/{{ view }}/add">Create a new {{ view|replace('-', ' ') }}</a>
         <div class="clear"></div>
     </div>
 
@@ -24,8 +24,8 @@
                             <th>{{ item[key] }}</th>
                         {% endfor %}
                         <td class="center">
-                            <a class="btn btn-xs btn-primary" href="/{{ view }}/edit/{{ item['id'] }}">Edit</a>
                             <a class="btn btn-xs btn-info" href="/{{ view }}/{{ item['id'] }}">Details</a>
+                            <a class="btn btn-xs btn-primary" href="/{{ view }}/edit/{{ item['id'] }}">Edit</a>
                         </td>
                     </tr>
                 {% endfor %}
