@@ -33,7 +33,7 @@ def add():
                 data[key] = getattr(form, key).data
         item = BackUtils().add(view, data)
         return redirect(url_for('%s.list' % view))
-    return render_template('crud/add.html', view=view, form=form)
+    return render_template('%s/add.html' % view, view=view, form=form)
 
 @client_bp.route('/edit')
 def edit():

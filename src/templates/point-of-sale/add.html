@@ -1,0 +1,52 @@
+{% extends "crud/add.html" %}
+
+{% block form %}
+    <form method="post" action="" class="form-horizontal" role="form" enctype="multipart/form-data" >
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <label class="col-sm-2 control-label">{{ form.client_id.label }}</label>
+            <div class="col-sm-10">
+                {{ form.client_id(class="form-control") }}
+                <p class="red">{{ form.client_id.errors|join('<br />') }}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">{{ form.delivery_price.label }}</label>
+            <div class="col-sm-10">
+                {{ form.delivery_price(class="form-control",placeholder=form.delivery_price.description.placeholder|default('')) }}
+                <p class="red">{{ form.delivery_price.errors|join('<br />') }}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">{{ form.address.label }}</label>
+            <div class="col-sm-10">
+                {{ form.address(class="form-control",placeholder=form.address.description.placeholder|default('')) }}
+                <p class="red">{{ form.address.errors|join('<br />') }}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">{{ form.zip_code.label }}</label>
+            <div class="col-sm-10">
+                {{ form.zip_code(class="form-control",placeholder=form.zip_code.description.placeholder|default('')) }}
+                <p class="red">{{ form.zip_code.errors|join('<br />') }}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">{{ form.city.label }}</label>
+            <div class="col-sm-10">
+                {{ form.city(class="form-control",placeholder=form.city.description.placeholder|default('')) }}
+                <p class="red">{{ form.city.errors|join('<br />') }}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">{{ form.additional_data.label }}</label>
+            <div class="col-sm-10">
+                {{ form.additional_data(class="form-control",placeholder=form.additional_data.description.placeholder|default('')) }}
+                <p class="red">{{ form.additional_data.errors|join('<br />') }}</p>
+            </div>
+        </div>
+        <div>
+            <p class="float-right"><button type="submit" class="btn btn-lg btn-primary">Create</button></p>
+        </div>
+    </form>
+{% endblock form %}
