@@ -28,11 +28,13 @@ def import_blueprints():
     from action.deliverer import deliverer_bp
     from action.distribution_round import distribution_round_bp
     from action.point_of_sale import point_of_sale_bp
+    from action.supplier import supplier_bp
 
     application.register_blueprint(client_bp)
     application.register_blueprint(deliverer_bp)
     application.register_blueprint(distribution_round_bp)
     application.register_blueprint(point_of_sale_bp)
+    application.register_blueprint(supplier_bp)
 
 
 @application.before_request
