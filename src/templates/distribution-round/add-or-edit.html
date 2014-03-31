@@ -1,0 +1,45 @@
+{% extends "crud/" + action + ".html" %}
+
+{% block form %}
+    <form method="post" action="" class="form-horizontal" role="form" enctype="multipart/form-data" >
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <label class="col-sm-2 control-label">{{ form.deliverer_id.label }}</label>
+            <div class="col-sm-10">
+                {{ form.deliverer_id(class="form-control") }}
+                <p class="red">{{ form.deliverer_id.errors|join('<br />') }}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">{{ form.name.label }}</label>
+            <div class="col-sm-10">
+                {{ form.name(class="form-control",placeholder=form.name.description.placeholder|default('')) }}
+                <p class="red">{{ form.name.errors|join('<br />') }}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">{{ form.cost.label }}</label>
+            <div class="col-sm-10">
+                {{ form.cost(class="form-control",placeholder=form.cost.description.placeholder|default('')) }}
+                <p class="red">{{ form.cost.errors|join('<br />') }}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">{{ form.unitary_cost.label }}</label>
+            <div class="col-sm-10">
+                {{ form.unitary_cost(class="form-control",placeholder=form.unitary_cost.description.placeholder|default('')) }}
+                <p class="red">{{ form.unitary_cost.errors|join('<br />') }}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">{{ form.schedule.label }}</label>
+            <div class="col-sm-10">
+                {{ form.schedule(class="form-control",placeholder=form.schedule.description.placeholder|default('')) }}
+                <p class="red">{{ form.schedule.errors|join('<br />') }}</p>
+            </div>
+        </div>
+        <div>
+            <p class="float-right"><button type="submit" class="btn btn-lg btn-primary">Validate</button></p>
+        </div>
+    </form>
+{% endblock form %}
