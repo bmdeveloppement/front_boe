@@ -6,8 +6,8 @@ from action.crud import CrudAction
 
 view = 'supplier'
 supplier_bp = Blueprint(view, __name__, url_prefix='/%s' % view)
-keys = ['id', 'company_name', 'email_address', 'reporting', 'reporting_hour']
-translations = ['#', 'Company Name', 'Email Address', 'Report', 'Report hour']
+keys = ['id', 'company_name', 'email_address', 'report', 'reporting_hour']
+translations = ['#', 'Company Name', 'Email Address', 'Report', 'Reporting hour']
 
 
 @supplier_bp.route('/<int:reference_id>', methods=['GET'])
@@ -22,7 +22,6 @@ def get(reference_id, methods=['GET']):
 def list():
     """List items"""
     items = BackUtils().list(view)
-    print items.__dict__
     return render_template('crud/list.html', view=view, items=items,
                            keys=keys, translations=translations)
 

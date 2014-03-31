@@ -18,6 +18,10 @@ class CrudAction(object):
             for key in keys:
                 if key is not 'id':
                     data[key] = getattr(form, key).data
+                    if data[key] is True:
+                        data[key] = 1
+                    elif data[key] is False:
+                        data[key] = 0
             item = BackUtils().add(view, data)
 
             # Flash message
@@ -48,6 +52,10 @@ class CrudAction(object):
             for key in keys:
                 if key is not 'id':
                     data[key] = getattr(form, key).data
+                    if data[key] is True:
+                        data[key] = 1
+                    elif data[key] is False:
+                        data[key] = 0
             item = BackUtils().edit(view, reference_id, data)
 
             # Flash message

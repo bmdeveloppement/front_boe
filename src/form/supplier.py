@@ -16,7 +16,7 @@ class MainForm(Form):
         description={'placeholder': u"Ex : name@mycompany.com"})
     report = BooleanField(u'Report')
     reporting_hour = TextField(
-        u'Report Hour',
+        u'Reporting Hour',
         validators=[validators.Required(u"This field is required")],
         description={'placeholder': u"Ex : 22:00:00"})
 
