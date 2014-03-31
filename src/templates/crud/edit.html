@@ -1,0 +1,18 @@
+{% extends "container.html" %}
+
+{% block content %}
+    <div class="page-header">
+        <h3 class="float-left">Edit {{ view|capitalize|replace('-', ' ') }}</h3>
+        <a class="btn btn-danger float-right" href="/{{ view }}">Return to {{ view|replace('-', ' ') }} list</a>
+        <div class="clear"></div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Edition form</h3>
+        </div>
+        <div class="panel-body">
+            {% block form %}{% endblock form %}
+        </div>
+    </div>
+{% endblock content %}

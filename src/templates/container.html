@@ -6,15 +6,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="shortcut icon" href="../public/ico/favicon.ico">
+        <link rel="shortcut icon" href="/../public/ico/favicon.ico">
 
         <title>Back Office</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="../public/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/../public/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
-        <link href="../public/css/main.css" rel="stylesheet">
+        <link href="/../public/css/main.css" rel="stylesheet">
     </head>
     <body>
         <!-- Fixed navbar -->
@@ -55,6 +55,15 @@
 
         <div class="container">
             <div class="content">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                <p><strong>{{ message }}<strong></p>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
                 {% block content %}{% endblock content %}
                 <div class="clear"></div>
             </div>
@@ -63,6 +72,6 @@
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="../public/js/bootstrap.min.js"></script>
+        <script src="/../public/js/bootstrap.min.js"></script>
     </body>
 </html>

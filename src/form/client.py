@@ -11,7 +11,8 @@ class MainForm(Form):
         description={'placeholder': u"Ex : My Company"})
     email_address = TextField(
         u'Email Address',
-        validators=[validators.Required(u"This field is required")],
+        validators=[validators.Required(u"This field is required"),
+                    validators.Email(u'Must be an email address')],
         description={'placeholder': u"Ex : name@mycompany.com"})
 
 

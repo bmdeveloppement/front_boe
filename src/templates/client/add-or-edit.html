@@ -1,4 +1,4 @@
-{% extends "crud/add.html" %}
+{% extends "crud/" + action + ".html" %}
 
 {% block form %}
     <form method="post" action="" class="form-horizontal" role="form" enctype="multipart/form-data" >
@@ -18,7 +18,7 @@
             </div>
         </div>
         <div>
-            <p class="float-right"><button type="submit" class="btn btn-lg btn-primary">Create</button></p>
+            <p class="float-right"><button type="submit" class="btn btn-lg btn-primary">Validate</button></p>
         </div>
     </form>
 {% endblock form %}

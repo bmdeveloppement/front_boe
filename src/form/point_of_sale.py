@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask.ext.wtf import Form
-from wtforms import TextField, SelectField, validators
+from wtforms import TextField, SelectField, FloatField, validators
 
 
 class MainForm(Form):
@@ -9,7 +9,7 @@ class MainForm(Form):
         u'Client',
         validators=[validators.Required("This field is required.")],
         coerce=int)
-    delivery_price = TextField(
+    delivery_price = FloatField(
         u'Delivery Price',
         validators=[validators.Required(u"This field is required")],
         description={'placeholder': u"Ex : 0.57"})
@@ -19,7 +19,9 @@ class MainForm(Form):
         description={'placeholder': u"Ex : 3 rue Voltaire"})
     zip_code = TextField(
         u'Zip Code',
-        validators=[validators.Required(u"This field is required")],
+        validators=[validators.Required(u"This field is required"),
+                    validators.NumberRange(min=0, max=None,
+                                           message="Must be a number")],
         description={'placeholder': u"Ex : 75010"})
     city = TextField(
         u'City',

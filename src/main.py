@@ -5,7 +5,7 @@ import os
 import traceback
 
 from os import path
-from flask import redirect, url_for, make_response, g, session
+from flask import redirect, url_for, make_response, g, session, flash
 from lib.configurator import Configurator
 from lib.boe_app import BoeFlaskApplication
 
@@ -14,10 +14,13 @@ Configurator(os.path.dirname(__file__))
 application = BoeFlaskApplication(__name__,
                                   template_folder='templates',
                                   static_folder='public')
+application.secret_key = 'boe_secret_key'
+
 
 @application.route('/')
 def root():
     return redirect(url_for('point_of_sale.list'))
+
 
 def import_blueprints():
     """Import BPs"""
@@ -27,10 +30,12 @@ def import_blueprints():
     application.register_blueprint(client_bp)
     application.register_blueprint(point_of_sale_bp)
 
+
 @application.before_request
 def authentify():
     """Authentify request before treatment"""
     pass
+
 
 def set_http_handlers():
     @application.errorhandler(Exception)
