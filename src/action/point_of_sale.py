@@ -44,7 +44,7 @@ def add():
     clients = BackUtils().list_field('client', 'company_name')
     form.client_id.choices = clients
 
-    # Update keys to send client_id to Core
+    # Update keys to send id to Back
     keys = ['client_id', 'delivery_price', 'address', 'zip_code', 'city',
             'additional_data']
 
@@ -60,7 +60,7 @@ def edit(reference_id):
     clients = BackUtils().list_field('client', 'company_name')
     form.client_id.choices = clients
 
-    # Update keys to send client_id to Core
+    # Update keys to send id to Back
     keys = ['client_id', 'delivery_price', 'address', 'zip_code', 'city',
             'additional_data']
 

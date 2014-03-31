@@ -12,7 +12,7 @@ class MainForm(Form):
     delivery_price = FloatField(
         u'Delivery Price',
         validators=[validators.Required(u"This field is required")],
-        description={'placeholder': u"Ex : 0.57"})
+        description={'placeholder': u"Ex : 0.57 €"})
     address = TextField(
         u'Address',
         validators=[validators.Required(u"This field is required")],
