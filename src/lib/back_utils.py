@@ -34,7 +34,7 @@ class BackUtils(Singleton):
     def list_field(self, key, field_name):
         """Get a list by key"""
         uri = '%s/%s/field_name/%s' % (self.url_back_boe, key.replace('-', '_'), field_name)
-        return requests.post(uri, data='')
+        return requests.post(uri, data={u'order_by': u'company_name asc', u'limit': 5})
 
     @load_response
     def add(self, key, data):
