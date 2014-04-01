@@ -40,7 +40,7 @@ def add():
     """Add an item"""
     form = AddForm(csrf_enabled=False)
 
-    # Get client list
+    # Get list
     clients = BackUtils().list_field('client', 'company_name')
     form.client_id.choices = clients
 
@@ -56,7 +56,7 @@ def edit(reference_id):
     """Edit an item"""
     form = AddForm(csrf_enabled=False)
 
-    # Get client list
+    # Get list
     clients = BackUtils().list_field('client', 'company_name')
     form.client_id.choices = clients
 
