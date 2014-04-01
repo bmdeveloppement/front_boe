@@ -28,7 +28,7 @@ class BackUtils(Singleton):
     def list(self, key):
         """Get a list by key"""
         uri = '%s/%s/' % (self.url_back_boe, key.replace('-', '_'))
-        return requests.post(uri, data={u'order_by': u'address', u'limit': 5, u'offset': 1})
+        return requests.post(uri, data={u'order_by': u'address desc', u'limit': 5, u'offset': 1})
 
     @load_response
     def list_field(self, key, field_name):
