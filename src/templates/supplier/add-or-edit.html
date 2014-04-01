@@ -20,7 +20,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">{{ form.report.label }}</label>
             <div class="col-sm-10">
-                {{ form.report(class="form-control",placeholder=form.report.description.placeholder|default('')) }}
+                {{ form.report(class="checkbox",placeholder=form.report.description.placeholder|default('')) }}
                 <p class="red">{{ form.report.errors|join('<br />') }}</p>
             </div>
         </div>
