@@ -5,6 +5,9 @@ html {
 body {
     padding-top: 50px;
 }
+.table-striped th a {
+    color: #333;
+}
 .content {
     margin: 10px;
 }

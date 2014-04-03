@@ -2,6 +2,10 @@ application:
     domain: front.boe.dev
     url_back_boe: 'http://back.boe.dev'
 
+crud:
+    result_per_page: 15
+    list_limit: 5000
+
 cache:
     'cache.type': 'memory'
 

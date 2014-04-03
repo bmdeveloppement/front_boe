@@ -25,12 +25,15 @@ def get(reference_id):
                            keys=keys, translations=translations)
 
 
-@press_title_bp.route('/')
-def list():
+@press_title_bp.route('/', methods=['GET'])
+@press_title_bp.route('/page/<int:page>', methods=['GET'])
+@press_title_bp.route('/page/<int:page>/order_by/<string:order_by>/sort/<string:sort>', methods=['GET'])
+def list(page=1, order_by='name', sort='asc'):
     """List items"""
-    items = BackUtils().list('press_title')
+    items = BackUtils().list(view, page, order_by + ' ' + sort)
     return render_template('crud/list.html', view=view, items=items,
-                           keys=keys, translations=translations)
+                           keys=keys, translations=translations,
+                           page=page, order_by=order_by, sort=sort)
 
 
 @press_title_bp.route('/add', methods=['GET', 'POST'])

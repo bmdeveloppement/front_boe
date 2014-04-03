@@ -19,11 +19,14 @@ def get(reference_id, methods=['GET']):
 
 
 @client_bp.route('/', methods=['GET'])
-def list():
+@client_bp.route('/page/<int:page>', methods=['GET'])
+@client_bp.route('/page/<int:page>/order_by/<string:order_by>/sort/<string:sort>', methods=['GET'])
+def list(page=1, order_by='company_name', sort='asc'):
     """List items"""
-    items = BackUtils().list(view)
+    items = BackUtils().list(view, page, order_by + ' ' + sort)
     return render_template('crud/list.html', view=view, items=items,
-                           keys=keys, translations=translations)
+                           keys=keys, translations=translations,
+                           page=page, order_by=order_by, sort=sort)
 
 
 @client_bp.route('/add', methods=['GET', 'POST'])
@@ -37,5 +40,4 @@ def add():
 def edit(reference_id):
     """Edit items"""
     form = EditForm(csrf_enabled=False)
-
     return CrudAction().edit(view, form, keys, 'company_name', reference_id)

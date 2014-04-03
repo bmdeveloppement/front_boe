@@ -27,12 +27,15 @@ def get(reference_id):
                            keys=keys, translations=translations)
 
 
-@point_of_sale_bp.route('/')
-def list():
+@point_of_sale_bp.route('/', methods=['GET'])
+@point_of_sale_bp.route('/page/<int:page>', methods=['GET'])
+@point_of_sale_bp.route('/page/<int:page>/order_by/<string:order_by>/sort/<string:sort>', methods=['GET'])
+def list(page=1, order_by='address', sort='asc'):
     """List items"""
-    items = BackUtils().list('point_of_sale')
+    items = BackUtils().list(view, page, order_by + ' ' + sort)
     return render_template('crud/list.html', view=view, items=items,
-                           keys=keys, translations=translations)
+                           keys=keys, translations=translations,
+                           page=page, order_by=order_by, sort=sort)
 
 
 @point_of_sale_bp.route('/add', methods=['GET', 'POST'])

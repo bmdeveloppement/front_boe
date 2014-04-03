@@ -8,11 +8,21 @@
     </div>
 
     <div class="table-responsive">
+        {% if items %}
         <table class="table table-striped">
             <thead>
                 <tr>
                     {% for translation in translations %}
-                        <th>{{ translation }}</th>
+                        {% if order_by == keys[loop.index0] %}
+                            {% set sort_direction = 'asc' if sort == 'desc' else 'desc' %}
+                        {% else %}
+                            {% set sort_direction = 'asc' %}
+                        {% endif %}
+                        <th>
+                            <a href="/{{ view }}/page/{{ page }}/order_by/{{ keys[loop.index0] }}/sort/{{ sort_direction }}">
+                                {{ translation }} <b class="caret"></b>
+                            </a>
+                        </th>
                     {% endfor %}
                     <th class="center">Actions</th>
                 </tr>
@@ -31,5 +41,10 @@
                 {% endfor %}
             </tbody>
         </table>
+        {% else %}
+            <div class="alert alert-danger">
+                <strong>Sorry !</strong> No result was found.
+            </div>
+        {% endif %}
     </div>
 {% endblock content %}
