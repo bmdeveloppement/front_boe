@@ -23,10 +23,7 @@ def get(reference_id, methods=['GET']):
 @deliverer_bp.route('/page/<int:page>/order_by/<string:order_by>/sort/<string:sort>', methods=['GET'])
 def list(page=1, order_by='company_name', sort='asc'):
     """List items"""
-    items = BackUtils().list(view, page, order_by + ' ' + sort)
-    return render_template('crud/list.html', view=view, items=items,
-                           keys=keys, translations=translations,
-                           page=page, order_by=order_by, sort=sort)
+    return CrudAction().list(view, keys, translations, page, order_by, sort)
 
 
 @deliverer_bp.route('/add', methods=['GET', 'POST'])

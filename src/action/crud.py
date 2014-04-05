@@ -8,6 +8,27 @@ logger = logging.getLogger(__name__)
 
 class CrudAction(object):
 
+    def list(self, view, keys, translations, page, order_by, sort):
+        """List items, with order and pagination"""
+        from lib.configurator import Configurator
+        from lib.pagination_utils import Pagination
+
+        # Get per_page
+        per_page = int(Configurator().get_setting('crud')['result_per_page'])
+
+        # Get data from back
+        result = BackUtils().list(view, page, order_by + ' ' + sort)
+
+        # Pagiation object
+        pagination = Pagination(page, per_page, result['count'])
+
+        # Render
+        return render_template('crud/list.html', view=view,
+                               items=result['items'], keys=keys,
+                               translations=translations,
+                               order_by=order_by, sort=sort,
+                               pagination=pagination)
+
     def add(self, view, form, keys, key_name):
         """Add item"""
         # Submit

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, request
+from flask import Flask, request, url_for
 import sys
 import logging
 
@@ -32,6 +32,7 @@ class BoeFlaskApplication(Flask):
         requests_log = logging.getLogger("requests")
         requests_log.setLevel(logging.WARNING)
         self.logger.setLevel(logging.getLogger().getEffectiveLevel())
+        self.jinja_env.globals['url_for_other_page'] = self.url_for_other_page
 
         for handler in handlers:
             self.logger.addHandler(handler)
@@ -82,3 +83,9 @@ class BoeFlaskApplication(Flask):
         status_code = getattr(e, 'code', 500)
         self.log_exception(sys.exc_info(), status_code)
         return super(BoeFlaskApplication, self).handle_http_exception(e)
+
+    def url_for_other_page(self, page):
+        """URL Generation Helper"""
+        args = request.view_args.copy()
+        args['page'] = page
+        return url_for(request.endpoint, **args)
