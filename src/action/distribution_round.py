@@ -8,6 +8,7 @@ view = 'distribution-round'
 distribution_round_bp = Blueprint(view, __name__, url_prefix='/%s' % view)
 keys = ['id', 'name', 'cost', 'unitary_cost']
 translations = ['#', 'Name', 'Cost', 'Unitary Cost']
+key_name = 'name'
 
 
 @distribution_round_bp.route('/<int:reference_id>')
@@ -44,7 +45,7 @@ def add():
     # Update keys to send id to Back
     keys = ['id', 'deliverer_id', 'name', 'cost', 'unitary_cost', 'schedule']
 
-    return CrudAction().add(view, form, keys, 'name')
+    return CrudAction().add(view, form, keys, self.key_name)
 
 
 @distribution_round_bp.route('/edit/<int:reference_id>', methods=['GET', 'POST'])
@@ -59,4 +60,10 @@ def edit(reference_id):
     # Update keys to send id to Back
     keys = ['id', 'deliverer_id', 'name', 'cost', 'unitary_cost', 'schedule']
 
-    return CrudAction().edit(view, form, keys, 'name', reference_id)
+    return CrudAction().edit(view, form, keys, self.key_name, reference_id)
+
+@distribution_round_bp.route('/delete/<int:reference_id>', methods=['GET'])
+@distribution_round_bp.route('/delete/<int:reference_id>/confirmed/<int:confirmed>', methods=['GET'])
+def delete(reference_id, confirmed=False):
+    """Delete items"""
+    return CrudAction().delete(view, self.key_name, reference_id, confirmed)

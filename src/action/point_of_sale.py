@@ -10,6 +10,7 @@ keys = ['id', 'delivery_price', 'address', 'zip_code', 'city',
         'additional_data']
 translations = ['#', 'Delivery Price', 'Address', 'Zip Code', 'City',
                 'Additional Data']
+key_name = 'address'
 
 
 @point_of_sale_bp.route('/<int:reference_id>')
@@ -48,7 +49,7 @@ def add():
     keys = ['client_id', 'delivery_price', 'address', 'zip_code', 'city',
             'additional_data']
 
-    return CrudAction().add(view, form, keys, 'address')
+    return CrudAction().add(view, form, keys, self.key_name)
 
 
 @point_of_sale_bp.route('/edit/<int:reference_id>', methods=['GET', 'POST'])
@@ -64,4 +65,10 @@ def edit(reference_id):
     keys = ['client_id', 'delivery_price', 'address', 'zip_code', 'city',
             'additional_data']
 
-    return CrudAction().edit(view, form, keys, 'address', reference_id)
+    return CrudAction().edit(view, form, keys, self.key_name, reference_id)
+
+@point_of_sale_bp.route('/delete/<int:reference_id>', methods=['GET'])
+@point_of_sale_bp.route('/delete/<int:reference_id>/confirmed/<int:confirmed>', methods=['GET'])
+def delete(reference_id, confirmed=False):
+    """Delete items"""
+    return CrudAction().delete(view, self.key_name, reference_id, confirmed)

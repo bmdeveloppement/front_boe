@@ -8,6 +8,7 @@ view = 'client'
 client_bp = Blueprint(view, __name__, url_prefix='/%s' % view)
 keys = ['id', 'company_name', 'email_address']
 translations = ['#', 'Company Name', 'Email Address']
+key_name = 'company_name'
 
 
 @client_bp.route('/<int:reference_id>', methods=['GET'])
@@ -30,18 +31,18 @@ def list(page=1, order_by='company_name', sort='asc'):
 def add():
     """Add an item"""
     form = AddForm(csrf_enabled=False)
-    return CrudAction().add(view, form, keys, 'company_name')
+    return CrudAction().add(view, form, keys, self.key_name)
 
 
 @client_bp.route('/edit/<int:reference_id>', methods=['GET', 'POST'])
 def edit(reference_id):
     """Edit items"""
     form = EditForm(csrf_enabled=False)
-    return CrudAction().edit(view, form, keys, 'company_name', reference_id)
+    return CrudAction().edit(view, form, keys, self.key_name, reference_id)
 
 
 @client_bp.route('/delete/<int:reference_id>', methods=['GET'])
 @client_bp.route('/delete/<int:reference_id>/confirmed/<int:confirmed>', methods=['GET'])
 def delete(reference_id, confirmed=False):
     """Delete items"""
-    return CrudAction().delete(view, 'company_name', reference_id, confirmed)
+    return CrudAction().delete(view, self.key_name, reference_id, confirmed)
