@@ -47,7 +47,7 @@ def add():
     keys = ['id', 'supplier_id', 'name', 'supplier_cost',
             'royalty_cost', 'paging']
 
-    return CrudAction().add(view, form, keys, self.key_name)
+    return CrudAction().add(view, form, keys, key_name)
 
 
 @press_title_bp.route('/edit/<int:reference_id>', methods=['GET', 'POST'])
@@ -63,10 +63,11 @@ def edit(reference_id):
     keys = ['id', 'supplier_id', 'name', 'supplier_cost',
             'royalty_cost', 'paging']
 
-    return CrudAction().edit(view, form, keys, self.key_name, reference_id)
+    return CrudAction().edit(view, form, keys, key_name, reference_id)
+
 
 @press_title_bp.route('/delete/<int:reference_id>', methods=['GET'])
 @press_title_bp.route('/delete/<int:reference_id>/confirmed/<int:confirmed>', methods=['GET'])
 def delete(reference_id, confirmed=False):
     """Delete items"""
-    return CrudAction().delete(view, self.key_name, reference_id, confirmed)
+    return CrudAction().delete(view, key_name, reference_id, confirmed)
