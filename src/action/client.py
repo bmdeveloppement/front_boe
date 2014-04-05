@@ -38,3 +38,9 @@ def edit(reference_id):
     """Edit items"""
     form = EditForm(csrf_enabled=False)
     return CrudAction().edit(view, form, keys, 'company_name', reference_id)
+
+
+@client_bp.route('/delete/<int:reference_id>', methods=['GET'])
+def delete(reference_id):
+    """Delete items"""
+    return CrudAction().delete(view, 'company_name', reference_id)

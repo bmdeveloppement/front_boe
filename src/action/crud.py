@@ -99,3 +99,10 @@ class CrudAction(object):
         # Render form
         return render_template('%s/add-or-edit.html' % view, view=view,
                                form=form, action='edit')
+
+    def delete(self, view, key_name, reference_id):
+        """Delete item"""
+        item = BackUtils().get(view, reference_id)
+
+        # Render
+        return render_template('crud/delete.html', view=view, item_name=item[key_name])

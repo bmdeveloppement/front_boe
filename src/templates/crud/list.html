@@ -5,8 +5,10 @@
     {% from 'common/paginator.html' import render_pagination %}
 
     <div class="page-header">
-        <h3 class="float-left">{{ view|capitalize|replace('-', ' ') }} List</h3>
-        <a class="btn btn-success float-right" href="/{{ view }}/add">Create a new {{ view|replace('-', ' ') }}</a>
+        <h3 class="float-left">{{ view|capitalize|replace('-', ' ') }} list</h3>
+        <a class="btn btn-success float-right" href="/{{ view }}/add">
+            <i class='glyphicon glyphicon-pencil'></i> Create a new {{ view|replace('-', ' ') }}
+        </a>
         <div class="clear"></div>
     </div>
 
@@ -27,7 +29,7 @@
                             </a>
                         </th>
                     {% endfor %}
-                    <th class="center">Actions</th>
+                    <th class="center action-column">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,8 +39,17 @@
                             <th>{{ item[key] }}</th>
                         {% endfor %}
                         <td class="center">
-                            <a class="btn btn-xs btn-info" href="/{{ view }}/{{ item['id'] }}">Details</a>
-                            <a class="btn btn-xs btn-primary" href="/{{ view }}/edit/{{ item['id'] }}">Edit</a>
+                            <a class="btn btn-xs btn-info" href="/{{ view }}/{{ item['id'] }}">
+                                <i class='glyphicon glyphicon-eye-open'></i> View
+                            </a>
+                            &nbsp;
+                            <a class="btn btn-xs btn-primary" href="/{{ view }}/edit/{{ item['id'] }}">
+                                <i class='glyphicon glyphicon-edit'></i> Edit
+                            </a>
+                            &nbsp;
+                            <a class="btn btn-xs btn-danger" href="/{{ view }}/delete/{{ item['id'] }}">
+                                <i class='glyphicon glyphicon-trash'></i> Delete
+                            </a>
                         </td>
                     </tr>
                 {% endfor %}
