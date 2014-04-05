@@ -19,12 +19,13 @@ application.secret_key = 'boe_secret_key'
 
 @application.route('/')
 def root():
-    return redirect(url_for('point_of_sale.list'))
+    return redirect(url_for('dashboard.view'))
 
 
 def import_blueprints():
     """Import BPs"""
     from action.client import client_bp
+    from action.dashboard import dashboard_bp
     from action.deliverer import deliverer_bp
     from action.distribution_round import distribution_round_bp
     from action.point_of_sale import point_of_sale_bp
@@ -32,6 +33,7 @@ def import_blueprints():
     from action.supplier import supplier_bp
 
     application.register_blueprint(client_bp)
+    application.register_blueprint(dashboard_bp)
     application.register_blueprint(deliverer_bp)
     application.register_blueprint(distribution_round_bp)
     application.register_blueprint(point_of_sale_bp)

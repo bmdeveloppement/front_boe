@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 import logging
-from flask import redirect, url_for, Blueprint, render_template, flash
+from flask import redirect, url_for, Blueprint, render_template, flash, g
 from lib.back_utils import BackUtils
 
 logger = logging.getLogger(__name__)
 
 
 class CrudAction(object):
+
+    def __init__(self):
+        """Init Crud"""
+        g.active_menu = 'more'
 
     def list(self, view, keys, translations, page, order_by, sort):
         """List items, with order and pagination"""

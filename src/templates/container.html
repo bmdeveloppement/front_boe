@@ -33,19 +33,27 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="/dashboard">
-                            <i class='glyphicon glyphicon-stats'></i>  Dashboard
-                        </a></li>
-                        <li><a href="/production">
-                            <i class='glyphicon glyphicon-list'></i> Production
-                        </a></li>
-                        <li><a href="/commercial-offer">
-                            <i class='glyphicon glyphicon-euro'></i> Commercial Offer
-                        </a></li>
-                        <li><a href="/new-order">
-                            <i class='glyphicon glyphicon-shopping-cart'></i> New Order
-                        </a></li>
-                        <li class="dropdown">
+                        <li class="{% if g.active_menu == 'dashboard' %} active {% endif %}">
+                            <a href="/dashboard">
+                                <i class='glyphicon glyphicon-stats'></i>  Dashboard
+                            </a>
+                        </li>
+                        <li class="{% if g.active_menu == 'production' %} active {% endif %}">
+                            <a href="/production">
+                                <i class='glyphicon glyphicon-list'></i> Production
+                            </a>
+                        </li>
+                        <li class="{% if g.active_menu == 'commercial-offer' %} active {% endif %}">
+                            <a href="/commercial-offer">
+                                <i class='glyphicon glyphicon-euro'></i> Commercial Offer
+                            </a>
+                        </li>
+                        <li class="{% if g.active_menu == 'new-order' %} active {% endif %}">
+                            <a href="/new-order">
+                                <i class='glyphicon glyphicon-shopping-cart'></i> New Order
+                            </a>
+                        </li>
+                        <li class="dropdown {% if g.active_menu == 'more' %} active {% endif %}">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/press-title">Press titles</a></li>

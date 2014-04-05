@@ -8,7 +8,7 @@ view = 'press-title'
 press_title_bp = Blueprint(view, __name__, url_prefix='/%s' % view)
 keys = ['id', 'name', 'supplier_cost', 'royalty_cost', 'paging']
 translations = ['#', 'Name', 'Supplier Cost', 'Royalty Cost', 'Paging']
-key_name = 'address'
+key_name = 'name'
 
 
 @press_title_bp.route('/<int:reference_id>')

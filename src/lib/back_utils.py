@@ -68,3 +68,10 @@ class BackUtils(Singleton):
                             key.replace('-', '_'),
                             reference_id)
         return requests.delete(uri)
+
+    @load_response
+    def dashboard(self, date_begin, date_end):
+        """Overview for dashboard statistics"""
+        uri = '%s/dashboard/' % (self.url_back_boe)
+        return requests.post(uri, data={u'date_begin': date_begin,
+                                        u'date_end': date_end})
