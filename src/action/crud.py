@@ -52,7 +52,7 @@ class CrudAction(object):
                       (view.replace('-', ' '), item_name), 'success')
             else:
                 flash(u"Creation of %s %s failed" %
-                      (view.replace('-', ' '), item_name), 'warning')
+                      (view.replace('-', ' '), item_name), 'danger')
 
             # Redirect to list
             return redirect(url_for('%s.list' % view))
@@ -86,7 +86,7 @@ class CrudAction(object):
                       (view.replace('-', ' '), item_name), 'success')
             else:
                 flash(u"Edition of %s %s failed" %
-                      (view.replace('-', ' '), item_name), 'warning')
+                      (view.replace('-', ' '), item_name), 'danger')
 
             # Redirect to list
             return redirect(url_for('%s.list' % view))
@@ -100,9 +100,29 @@ class CrudAction(object):
         return render_template('%s/add-or-edit.html' % view, view=view,
                                form=form, action='edit')
 
-    def delete(self, view, key_name, reference_id):
+    def delete(self, view, key_name, reference_id, confirmed):
         """Delete item"""
-        item = BackUtils().get(view, reference_id)
+        # Get the element
+        item_name = BackUtils().get(view, reference_id)[key_name]
+
+        # Deletion have been confirmed ?
+        if confirmed:
+            # Delete item
+            deletion_result = BackUtils().delete(view, reference_id)
+
+            # Flash message
+            if deletion_result:
+                flash(u"Deletion of %s %s successful !" %
+                      (view.replace('-', ' '), item_name), 'success')
+            else:
+                flash(u"Deletion of %s %s failed. This element is linked to others." %
+                      (view.replace('-', ' '), item_name), 'danger')
+
+            # Redirect to item list
+            return redirect(url_for('%s.list' % view))
 
         # Render
-        return render_template('crud/delete.html', view=view, item_name=item[key_name])
+        return render_template('crud/delete.html',
+                               view=view,
+                               reference_id=reference_id,
+                               item_name=item_name)

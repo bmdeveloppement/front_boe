@@ -41,6 +41,7 @@ def edit(reference_id):
 
 
 @client_bp.route('/delete/<int:reference_id>', methods=['GET'])
-def delete(reference_id):
+@client_bp.route('/delete/<int:reference_id>/confirmed/<int:confirmed>', methods=['GET'])
+def delete(reference_id, confirmed=False):
     """Delete items"""
-    return CrudAction().delete(view, 'company_name', reference_id)
+    return CrudAction().delete(view, 'company_name', reference_id, confirmed)

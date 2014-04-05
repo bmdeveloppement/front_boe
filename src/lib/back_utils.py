@@ -17,13 +17,17 @@ class BackUtils(Singleton):
     @load_response
     def get(self, key, reference_id):
         """Get an item by key & ref_id"""
-        uri = '%s/%s/%s' % (self.url_back_boe, key.replace('-', '_'), reference_id)
+        uri = '%s/%s/%s' % (self.url_back_boe,
+                            key.replace('-', '_'),
+                            reference_id)
         return requests.get(uri, data='')
 
     @load_response
     def get_full(self, key, reference_id):
         """Get a full item by key & ref_id"""
-        uri = '%s/%s/get_full/%s' % (self.url_back_boe, key.replace('-', '_'), reference_id)
+        uri = '%s/%s/get_full/%s' % (self.url_back_boe,
+                                     key.replace('-', '_'),
+                                     reference_id)
         return requests.get(uri, data='')
 
     @load_response
@@ -36,8 +40,10 @@ class BackUtils(Singleton):
 
     @load_response
     def list_field(self, key, field_name):
-        """Get a list by key"""
-        uri = '%s/%s/field_name/%s' % (self.url_back_boe, key.replace('-', '_'), field_name)
+        """Get a field list by key"""
+        uri = '%s/%s/field_name/%s' % (self.url_back_boe,
+                                       key.replace('-', '_'),
+                                       field_name)
         return requests.post(uri, data={u'order_by': field_name + ' asc',
                                         u'limit': self.list_limit})
 
@@ -49,6 +55,16 @@ class BackUtils(Singleton):
 
     @load_response
     def edit(self, key, reference_id, data):
-        """Add a new item"""
-        uri = '%s/%s/%s' % (self.url_back_boe, key.replace('-', '_'), reference_id)
+        """Edit an item"""
+        uri = '%s/%s/%s' % (self.url_back_boe,
+                            key.replace('-', '_'),
+                            reference_id)
         return requests.post(uri, data=data)
+
+    @load_response
+    def delete(self, key, reference_id):
+        """Delete an item"""
+        uri = '%s/%s/%s' % (self.url_back_boe,
+                            key.replace('-', '_'),
+                            reference_id)
+        return requests.delete(uri)
