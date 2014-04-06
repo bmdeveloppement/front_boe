@@ -11,7 +11,7 @@ def view():
     # Set the current menu
     g.active_menu = 'dashboard'
 
-    date_begin = '2014-01-01'
+    date_begin = '2010-01-01'
     date_end = '2014-12-01'
 
     # Get a sum of metrics for the period
