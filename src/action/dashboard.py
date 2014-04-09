@@ -1,6 +1,7 @@
 # -*- coding: utf-8 *-*
 from flask import redirect, url_for, Blueprint, render_template, flash, g
 from lib.back_utils import BackUtils
+from lib.format_utils import view_formatter
 
 dashboard_bp = Blueprint('dashboard', __name__, url_prefix='/dashboard')
 
@@ -19,5 +20,6 @@ def view():
 
     # Render the view
     return render_template('dashboard/view.html',
+                           view_formatter=view_formatter,
                            global_metric=metrics['newspaper_global_metrics'],
                            date_metrics=metrics['newspaper_date_metrics'])

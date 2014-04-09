@@ -1,30 +1,159 @@
 {% extends "container.html" %}
 
 {% block content %}
+    <script type="text/javascript">
+        var chart;
+        var chartData = [];
+
+        var data_provider = [
+            {% for date_metric in date_metrics %}
+                {
+                    "date": "{{ view_formatter('date', date_metric['date']) }}",
+                    "count": "{{ date_metric['count'] }}",
+                    "price": "{{ date_metric['price'] }}",
+                    "supplier_cost": "{{ date_metric['supplier_cost'] }}",
+                    "royalty_cost": "{{ date_metric['royalty_cost'] }}",
+                },
+            {% endfor %}
+        ];
+        AmCharts.ready(function() {
+            var chart = AmCharts.makeChart("chartdiv", {
+                "type": "serial",
+                "fontSize": 14,
+                "fontFamily": "sans-serif",
+                "theme": "none",
+                "marginLeft": 20,
+                "chart.pathToImages": "../js/amcharts/images/",
+                "dataProvider": data_provider,
+                "color": "grey",
+                "valueAxes": [{
+                    "id": "a1",
+                    "axisAlpha": 0,
+                    "position": "left",
+                    "unit": " €"
+                },{
+                    "id": "a2",
+                    "axisAlpha": 0,
+                    "gridAlpha": 0,
+                    "axisThickness": 0,
+                    "position": "right",
+                }],
+                "graphs": [{
+                    "balloonText": "<center class='legend'>Items sold<br /><span>[[value]]</span></center>",
+                    "bullet": "round",
+                    "bulletSize": 6,
+                    "lineColor": "#2d8aeb",
+                    "lineThickness": 3,
+                    "type": "smoothedLine",
+                    "valueField": "count",
+                    "valueAxis": "a2",
+                    "hidden": false,
+                    "title": "Items sold"
+                },{
+                    "balloonText": "<center class='legend'>Turnover<br /><span>[[value]] €</span></center>",
+                    "bullet": "round",
+                    "bulletSize": 6,
+                    "lineColor": "#05a705",
+                    "lineThickness": 3,
+                    "type": "smoothedLine",
+                    "valueField": "price",
+                    "valueAxis": "a1",
+                    "hidden": false,
+                    "title": "Turnover"
+                },{
+                    "balloonText": "<center class='legend'>Supplier cost<br /><span>[[value]] €</span></center>",
+                    "bullet": "round",
+                    "bulletSize": 6,
+                    "lineColor": "#ffa93c",
+                    "lineThickness": 3,
+                    "type": "smoothedLine",
+                    "valueField": "supplier_cost",
+                    "valueAxis": "a1",
+                    "hidden": false,
+                    "title": "Supplier cost"
+                },{
+                    "balloonText": "<center class='legend'>Royalty cost<br /><span>[[value]] €</span></center>",
+                    "bullet": "round",
+                    "bulletSize": 6,
+                    "lineColor": "#ff6868",
+                    "lineThickness": 3,
+                    "type": "smoothedLine",
+                    "valueField": "royalty_cost",
+                    "valueAxis": "a1",
+                    "hidden": false,
+                    "title": "Royalty cost"
+                }],
+                "chartCursor": {
+                    "categoryBalloonDateFormat": "DD/MM/YYYY",
+                    "cursorAlpha": 0,
+                    "cursorPosition": "mouse"
+                },
+                "dataDateFormat": "DD/MM/YYYY",
+                "categoryField": "date",
+                "categoryAxis": {
+                    "gridPosition": "start",
+                    "fontSize": 14,
+                    "axisAlpha":1,
+                    "tickLength":1,
+                    "minPeriod": "DD",
+                    "dashLength": 1,
+                    "position": "bottom",
+                    "gridAlpha": 1,
+                    "dashLength": 5,
+                    "gridColor": "#DDDDDD",
+                    "axisColor": "grey",
+                    "parseDates": true
+                },
+                "legend": {
+                    "useGraphSettings": true,
+                    "position": "top",
+                    "markerDisabledColor": "#CCCCCC",
+                    "valueText": "",
+                    "useMarkerColorForLabels": true,
+                    "fontSize": 16
+                },
+                "chartCursor": {
+                    "cursorAlpha": 0.5,
+                    "cursorColor": "#F58323",
+                    "categoryBalloonEnabled": true,
+                    "categoryBalloonColor": "#303030",
+                    "color": "#FFF",
+                }
+            });
+
+            chart.write("chartdiv");
+        });
+    </script>
+
+
     <div class="page-header">
         <h3 class="float-left">Dashboard</h3>
-        <div>This is where i'll put date controls</div>
+        <div class="float-right dashboard-datepicker">
+            <a class="btn btn-success float-right btn-datepicker" href="#">
+                <i class="glyphicon glyphicon-ok"></i> Go !
+            </a>
+            <input type="text" class="datepicker-control" value="24-05-2014" data-date="24-05-2014" data-date-format="dd-mm-yyyy" id="date_end">
+            <input type="text" class="datepicker-control" value="01-05-2014" data-date="01-05-2014" data-date-format="dd-mm-yyyy" id="date_begin">
+        </div>
         <div class="clear"></div>
     </div>
 
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h3 class="panel-title">Dashboard</h3>
+    <div class="quick-stats-box">
+        <div class="metric-box">
+            <span>{{ global_metric['count'] }}</span> items sold
         </div>
-        <div class="panel-body">
-            Date : {{ global_metric['date'] }}<br />
-            Titles : {{ global_metric['count'] }}<br />
-            Turnover : {{ global_metric['price'] }}<br />
-            Supplier Cost : {{ global_metric['supplier_cost'] }}<br />
-            Royalty Cost : {{ global_metric['royalty_cost'] }}<br /><br /><br />
-
-        	{% for date_metric in date_metrics %}
-                Date : {{ date_metric['date'] }}<br />
-                Titles : {{ date_metric['count'] }}<br />
-                Turnover : {{ date_metric['price'] }}<br />
-                Supplier Cost : {{ date_metric['supplier_cost'] }}<br />
-                Royalty Cost : {{ date_metric['royalty_cost'] }}<br /><br /><br />
-            {% endfor %}
+        <div class="metric-box green">
+            <span>{{ global_metric['price'] }} €</span> turnover
+        </div>
+        <div class="metric-box orange">
+            <span>{{ global_metric['supplier_cost'] }} €</span> supplier cost
+        </div>
+        <div class="metric-box red">
+            <span>{{ global_metric['royalty_cost'] }} €</span> royalty cost
         </div>
     </div>
+
+    <center>
+        <div id="chartdiv"></div>
+    </center>
 {% endblock content %}

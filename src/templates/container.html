@@ -14,9 +14,14 @@
         <link href="/../public/css/bootstrap.min.css" rel="stylesheet">
         <link href="/../public/css/bootstrap-switch.css" rel="stylesheet">
         <link href="/../public/css/bootstrap-theme.min.css" rel="stylesheet">
+        <link href="/../public/css/datepicker.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
         <link href="/../public/css/main.css" rel="stylesheet">
+
+        <!-- Amcharts -->
+        <script src="/../public/js/amcharts/amcharts.js"></script>
+        <script src="/../public/js/amcharts/serial.js"></script>
     </head>
     <body role='document' style>
         <!-- Fixed navbar -->
@@ -91,10 +96,13 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="/../public/js/bootstrap.min.js"></script>
-        <!-- Nice checkbox -->
+        <!-- Datepicker -->
+        <script src="/../public/js/bootstrap-datepicker.js"></script>
+        <!-- Checkbox -->
         <script src="/../public/js/bootstrap-switch.js"></script>
         <script>
-          $('input:checkbox').bootstrapSwitch();
+            $('input:checkbox').bootstrapSwitch();
+            $('.datepicker-control').datepicker()
         </script>
     </body>
 </html>
