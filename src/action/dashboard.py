@@ -14,12 +14,10 @@ def view():
     date_begin = '2010-01-01'
     date_end = '2014-12-01'
 
-    # Get a sum of metrics for the period
-    global_metrics = BackUtils().dashboard(date_begin,
-                                           date_end)
-    print global_metrics
-    # Get day per day metrics
-    # per_day_metrics = BackUtils().get_full(view, reference_id)
+    # Get metrics from date to date
+    metrics = BackUtils().dashboard(date_begin, date_end)
 
     # Render the view
-    return render_template('dashboard/view.html', global_metrics=global_metrics)
+    return render_template('dashboard/view.html',
+                           global_metric=metrics['newspaper_global_metrics'],
+                           date_metrics=metrics['newspaper_date_metrics'])
