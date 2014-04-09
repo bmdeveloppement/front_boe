@@ -22,4 +22,4 @@ def view():
     # per_day_metrics = BackUtils().get_full(view, reference_id)
 
     # Render the view
-    return render_template('dashboard/view.html')
+    return render_template('dashboard/view.html', global_metrics=global_metrics)

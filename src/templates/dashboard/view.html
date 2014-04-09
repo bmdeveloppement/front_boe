@@ -12,7 +12,13 @@
             <h3 class="panel-title">Dashboard</h3>
         </div>
         <div class="panel-body">
-        	Content
+        	{% for global_metric in global_metrics %}
+                Date : {{ global_metric['date'] }}<br />
+                Titles : {{ global_metric['count'] }}<br />
+                Turnover : {{ global_metric['price'] }}<br />
+                Supplier Cost : {{ global_metric['supplier_cost'] }}<br />
+                Royalty Cost : {{ global_metric['royalty_cost'] }}<br /><br /><br />
+            {% endfor %}
         </div>
     </div>
 {% endblock content %}
