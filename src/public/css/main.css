@@ -13,6 +13,7 @@ body {
 }
 .content {
     margin: 10px;
+    min-width: 1000px;
 }
 .page-header {
     margin-top: 20px;

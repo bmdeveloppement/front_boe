@@ -9,10 +9,10 @@
             {% for date_metric in date_metrics %}
                 {
                     "date": "{{ view_formatter('date', date_metric['date']) }}",
-                    "count": "{{ date_metric['newspaper_sold'] }}",
-                    "turnover": "{{ date_metric['turnover'] }}",
-                    "cost": "{{ date_metric['cost'] }}",
-                    "margin": "{{ date_metric['margin'] }}",
+                    "count": "{{ view_formatter('integer', date_metric['newspaper_sold']) }}",
+                    "turnover": "{{ view_formatter('integer', date_metric['turnover']) }}",
+                    "cost": "{{ view_formatter('integer', date_metric['cost']) }}",
+                    "margin": "{{ view_formatter('integer', date_metric['margin']) }}",
                 },
             {% endfor %}
         ];
@@ -129,11 +129,13 @@
     <div class="page-header">
         <h3 class="float-left">Dashboard</h3>
         <div class="float-right dashboard-datepicker">
-            <a class="btn btn-success float-right btn-datepicker" href="#">
-                <i class="glyphicon glyphicon-ok"></i> Go !
-            </a>
-            <input type="text" class="datepicker-control" value="24-05-2014" data-date="24-05-2014" data-date-format="dd-mm-yyyy" id="date_end">
-            <input type="text" class="datepicker-control" value="01-05-2014" data-date="01-05-2014" data-date-format="dd-mm-yyyy" id="date_begin">
+            <form action="{{ url_for('dashboard.view') }}" name="date-form" method="get" enctype="multipart/form-data">
+                <button type="submit" class="btn btn-success float-right btn-datepicker" id="date-submit" >
+                    <i class="glyphicon glyphicon-ok"></i> Go !
+                </button>
+                <input type="text" class="datepicker-control" value="{{ date_end }}" data-date-format="yyyy-mm-dd" name="date_end">
+                <input type="text" class="datepicker-control" value="{{ date_begin }}" data-date-format="yyyy-mm-dd" name="date_begin">
+            </form>
         </div>
         <div class="clear"></div>
     </div>
