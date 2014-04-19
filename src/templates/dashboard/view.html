@@ -9,10 +9,10 @@
             {% for date_metric in date_metrics %}
                 {
                     "date": "{{ view_formatter('date', date_metric['date']) }}",
-                    "count": "{{ date_metric['count'] }}",
-                    "price": "{{ date_metric['price'] }}",
-                    "supplier_cost": "{{ date_metric['supplier_cost'] }}",
-                    "royalty_cost": "{{ date_metric['royalty_cost'] }}",
+                    "count": "{{ date_metric['newspaper_sold'] }}",
+                    "turnover": "{{ date_metric['turnover'] }}",
+                    "cost": "{{ date_metric['cost'] }}",
+                    "margin": "{{ date_metric['margin'] }}",
                 },
             {% endfor %}
         ];
@@ -56,7 +56,7 @@
                     "lineColor": "#05a705",
                     "lineThickness": 3,
                     "type": "smoothedLine",
-                    "valueField": "price",
+                    "valueField": "turnover",
                     "valueAxis": "a1",
                     "hidden": false,
                     "title": "Turnover"
@@ -84,11 +84,11 @@
                     "title": "Margin"
                 }],
                 "chartCursor": {
-                    "categoryBalloonDateFormat": "DD/MM/YYYY",
+                    "categoryBalloonDateFormat": "YYYY-MM-DD",
                     "cursorAlpha": 0,
                     "cursorPosition": "mouse"
                 },
-                "dataDateFormat": "DD/MM/YYYY",
+                "dataDateFormat": "YYYY-MM-DD",
                 "categoryField": "date",
                 "categoryAxis": {
                     "gridPosition": "start",
@@ -153,15 +153,6 @@
         </div>
     </div>
 
-      {% for key, value in date_metrics.iteritems() %}
-            <dt>{{ key }}</dt>
-            <dd>{{ value }}</dd>
-            {% for subvalue in value %}
-                <dd>{{ subvalue }}</dd>
-
-                <dd>{{ subvalue['newspaper'] }}</dd>
-            {% endfor %}
-      {% endfor %}
     <center>
         <div id="chartdiv"></div>
     </center>

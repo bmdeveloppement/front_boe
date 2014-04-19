@@ -30,9 +30,32 @@ def view():
                       'turnover': turnover,
                       'cost': cost,
                       'margin': margin}
-    print metrics['date_metrics']
+
+    # Preprocess date metrics
+    date_metrics = []
+    for date, date_metric in metrics['date_metrics']:
+        newspaper_sold = 0
+        turnover = 0
+        cost = 0
+        for metric in date_metric:
+            if 'newspaper' in metric:
+                newspaper_sold += metric['newspaper']['count']
+                turnover += metric['newspaper']['price']
+                cost += metric['newspaper']['supplier_cost'] \
+                    + metric['newspaper']['royalty_cost']
+            if 'delivery' in metric:
+                turnover += metric['delivery']['price']
+            if 'distribution_round' in metric:
+                cost += metric['distribution_round']['cost']
+        margin = turnover - cost
+        date_metrics.append({'date': date,
+                             'newspaper_sold': newspaper_sold,
+                             'turnover': turnover,
+                             'cost': cost,
+                             'margin': margin})
+
     # Render the view
     return render_template('dashboard/view.html',
                            view_formatter=view_formatter,
                            global_metrics=global_metrics,
-                           date_metrics=metrics['date_metrics'])
+                           date_metrics=date_metrics)
