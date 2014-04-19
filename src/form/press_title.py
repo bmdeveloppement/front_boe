@@ -15,11 +15,9 @@ class MainForm(Form):
         description={'placeholder': u"Ex : Le Monde"})
     supplier_cost = FloatField(
         u'Supplier Cost',
-        validators=[validators.Required(u"This field is required")],
         description={'placeholder': u"Ex : 0.57 €"})
     royalty_cost = FloatField(
         u'Royalty Cost',
-        validators=[validators.Required(u"This field is required")],
         description={'placeholder': u"Ex : 0.15 € - Cost per copy"})
     paging = FloatField(
         u'Paging',

@@ -15,11 +15,9 @@ class MainForm(Form):
         description={'placeholder': u"Ex : Turn Barbes to Eiffel Tower"})
     cost = FloatField(
         u'Cost',
-        validators=[validators.Required(u"This field is required")],
         description={'placeholder': u"Ex : 14 €"})
     unitary_cost = FloatField(
         u'Unitary Cost',
-        validators=[validators.Required(u"This field is required")],
         description={'placeholder': u"Ex : 0.35 € - Cost per delivery"})
     schedule = TextField(
         u'Schedule',
