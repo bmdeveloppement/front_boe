@@ -39,7 +39,7 @@
                     "position": "right",
                 }],
                 "graphs": [{
-                    "balloonText": "<center class='legend'>Items sold<br /><span>[[value]]</span></center>",
+                    "balloonText": "<center class='legend'>Newspaper sold<br /><span>[[value]]</span></center>",
                     "bullet": "round",
                     "bulletSize": 6,
                     "lineColor": "#2d8aeb",
@@ -48,7 +48,7 @@
                     "valueField": "count",
                     "valueAxis": "a2",
                     "hidden": false,
-                    "title": "Items sold"
+                    "title": "Newspaper sold"
                 },{
                     "balloonText": "<center class='legend'>Turnover<br /><span>[[value]] €</span></center>",
                     "bullet": "round",
@@ -61,27 +61,27 @@
                     "hidden": false,
                     "title": "Turnover"
                 },{
-                    "balloonText": "<center class='legend'>Supplier cost<br /><span>[[value]] €</span></center>",
+                    "balloonText": "<center class='legend'>Cost<br /><span>[[value]] €</span></center>",
                     "bullet": "round",
                     "bulletSize": 6,
                     "lineColor": "#ffa93c",
                     "lineThickness": 3,
                     "type": "smoothedLine",
-                    "valueField": "supplier_cost",
+                    "valueField": "cost",
                     "valueAxis": "a1",
                     "hidden": false,
-                    "title": "Supplier cost"
+                    "title": "Cost"
                 },{
-                    "balloonText": "<center class='legend'>Royalty cost<br /><span>[[value]] €</span></center>",
+                    "balloonText": "<center class='legend'>Margin<br /><span>[[value]] €</span></center>",
                     "bullet": "round",
                     "bulletSize": 6,
                     "lineColor": "#ff6868",
                     "lineThickness": 3,
                     "type": "smoothedLine",
-                    "valueField": "royalty_cost",
+                    "valueField": "margin",
                     "valueAxis": "a1",
                     "hidden": false,
-                    "title": "Royalty cost"
+                    "title": "Margin"
                 }],
                 "chartCursor": {
                     "categoryBalloonDateFormat": "DD/MM/YYYY",
@@ -140,16 +140,16 @@
 
     <div class="quick-stats-box">
         <div class="metric-box">
-            <span>{{ global_metric['count'] }}</span> items sold
+            <span>{{ view_formatter('float', global_metrics['newspaper_sold']) }}</span> newspaper sold
         </div>
         <div class="metric-box green">
-            <span>{{ global_metric['price'] }} €</span> turnover
+            <span>{{ view_formatter('money', global_metrics['turnover']) }}</span> turnover
         </div>
         <div class="metric-box orange">
-            <span>{{ global_metric['supplier_cost'] }} €</span> supplier cost
+            <span>{{ view_formatter('money', global_metrics['cost']) }}</span> cost
         </div>
         <div class="metric-box red">
-            <span>{{ global_metric['royalty_cost'] }} €</span> royalty cost
+            <span>{{ view_formatter('money', global_metrics['margin']) }}</span> margin
         </div>
     </div>
 

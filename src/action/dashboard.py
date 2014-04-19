@@ -18,8 +18,26 @@ def view():
     # Get metrics from date to date
     metrics = BackUtils().dashboard(date_begin, date_end)
 
+    # Preprocess global metrics
+    newspaper_sold = metrics['newspaper_global_metrics']['count']
+    turnover = metrics['newspaper_global_metrics']['price'] + \
+        metrics['delivery_global_metrics']['price']
+    cost = metrics['newspaper_global_metrics']['supplier_cost'] + \
+        metrics['newspaper_global_metrics']['royalty_cost'] + \
+        metrics['distribution_round_global_metrics']['cost']
+    margin = turnover - cost
+    global_metrics = {'newspaper_sold': newspaper_sold,
+                      'turnover': turnover,
+                      'cost': cost,
+                      'margin': margin}
+
     # Render the view
     return render_template('dashboard/view.html',
                            view_formatter=view_formatter,
-                           global_metric=metrics['newspaper_global_metrics'],
-                           date_metrics=metrics['newspaper_date_metrics'])
+                           global_metrics=global_metrics,
+                           newspaper_global_metrics=metrics['newspaper_global_metrics'],
+                           newspaper_date_metrics=metrics['newspaper_date_metrics'],
+                           delivery_global_metrics=metrics['delivery_global_metrics'],
+                           delivery_date_metrics=metrics['delivery_date_metrics'],
+                           distribution_round_global_metrics=metrics['distribution_round_global_metrics'],
+                           distribution_round_date_metrics=metrics['distribution_round_date_metrics'])
