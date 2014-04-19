@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
+import logging
 import dateutil.parser
+
+logger = logging.getLogger(__name__)
 
 
 def view_formatter(type, data, suffix=False):
@@ -9,7 +12,7 @@ def view_formatter(type, data, suffix=False):
     try:
         if type == 'date':
             date = dateutil.parser.parse(data)
-            data = date.strftime('%m/%d/%Y')
+            data = date.strftime('%Y/%m/%d')
         elif type == 'integer':
             data = u'{0:,}'.format(int(float(data)))
         elif type == 'float':

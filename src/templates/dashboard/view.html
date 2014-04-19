@@ -140,7 +140,7 @@
 
     <div class="quick-stats-box">
         <div class="metric-box">
-            <span>{{ view_formatter('float', global_metrics['newspaper_sold']) }}</span> newspaper sold
+            <span>{{ view_formatter('integer', global_metrics['newspaper_sold']) }}</span> newspaper sold
         </div>
         <div class="metric-box green">
             <span>{{ view_formatter('money', global_metrics['turnover']) }}</span> turnover
@@ -153,6 +153,15 @@
         </div>
     </div>
 
+      {% for key, value in date_metrics.iteritems() %}
+            <dt>{{ key }}</dt>
+            <dd>{{ value }}</dd>
+            {% for subvalue in value %}
+                <dd>{{ subvalue }}</dd>
+
+                <dd>{{ subvalue['newspaper'] }}</dd>
+            {% endfor %}
+      {% endfor %}
     <center>
         <div id="chartdiv"></div>
     </center>
