@@ -53,6 +53,11 @@
                                 <i class='glyphicon glyphicon-euro'></i> Commercial Offer
                             </a>
                         </li>
+                        <li class="{% if g.active_menu == 'billing' %} active {% endif %}">
+                            <a href="/billing">
+                                <i class='glyphicon glyphicon-file'></i> Billing
+                            </a>
+                        </li>
                         <li class="{% if g.active_menu == 'new-order' %} active {% endif %}">
                             <a href="/new-order">
                                 <i class='glyphicon glyphicon-shopping-cart'></i> New Order

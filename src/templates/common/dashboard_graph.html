@@ -1,0 +1,125 @@
+{% macro render_graph(date_metrics, view_formatter) %}
+    <script type="text/javascript">
+        var chart;
+        var chartData = [];
+
+        var data_provider = [
+            {% for date_metric in date_metrics %}
+                {
+                    "date": "{{ view_formatter('date', date_metric['date']) }}",
+                    "count": "{{ view_formatter('float', date_metric['newspaper_sold']) }}",
+                    "turnover": "{{ view_formatter('float', date_metric['turnover']) }}",
+                    "cost": "{{ view_formatter('float', date_metric['cost']) }}",
+                    "margin": "{{ view_formatter('float', date_metric['margin']) }}",
+                },
+            {% endfor %}
+        ];
+        AmCharts.ready(function() {
+            var chart = AmCharts.makeChart("chartdiv", {
+                "type": "serial",
+                "fontSize": 14,
+                "fontFamily": "sans-serif",
+                "theme": "none",
+                "marginLeft": 20,
+                "chart.pathToImages": "../js/amcharts/images/",
+                "dataProvider": data_provider,
+                "color": "grey",
+                "valueAxes": [{
+                    "id": "a1",
+                    "axisAlpha": 0,
+                    "position": "left",
+                    "unit": " €"
+                },{
+                    "id": "a2",
+                    "axisAlpha": 0,
+                    "gridAlpha": 0,
+                    "axisThickness": 0,
+                    "position": "right",
+                }],
+                "graphs": [{
+                    "balloonText": "<center class='legend'>Newspaper sold<br /><span>[[value]]</span></center>",
+                    "bullet": "round",
+                    "bulletSize": 6,
+                    "lineColor": "#2d8aeb",
+                    "lineThickness": 3,
+                    "type": "smoothedLine",
+                    "valueField": "count",
+                    "valueAxis": "a2",
+                    "hidden": false,
+                    "title": "Newspaper sold"
+                },{
+                    "balloonText": "<center class='legend'>Turnover<br /><span>[[value]] €</span></center>",
+                    "bullet": "round",
+                    "bulletSize": 6,
+                    "lineColor": "#05a705",
+                    "lineThickness": 3,
+                    "type": "smoothedLine",
+                    "valueField": "turnover",
+                    "valueAxis": "a1",
+                    "hidden": false,
+                    "title": "Turnover"
+                },{
+                    "balloonText": "<center class='legend'>Cost<br /><span>[[value]] €</span></center>",
+                    "bullet": "round",
+                    "bulletSize": 6,
+                    "lineColor": "#ffa93c",
+                    "lineThickness": 3,
+                    "type": "smoothedLine",
+                    "valueField": "cost",
+                    "valueAxis": "a1",
+                    "hidden": false,
+                    "title": "Cost"
+                },{
+                    "balloonText": "<center class='legend'>Margin<br /><span>[[value]] €</span></center>",
+                    "bullet": "round",
+                    "bulletSize": 6,
+                    "lineColor": "#ff6868",
+                    "lineThickness": 3,
+                    "type": "smoothedLine",
+                    "valueField": "margin",
+                    "valueAxis": "a1",
+                    "hidden": false,
+                    "title": "Margin"
+                }],
+                "chartCursor": {
+                    "categoryBalloonDateFormat": "YYYY-MM-DD",
+                    "cursorAlpha": 0,
+                    "cursorPosition": "mouse"
+                },
+                "dataDateFormat": "YYYY-MM-DD",
+                "categoryField": "date",
+                "categoryAxis": {
+                    "gridPosition": "start",
+                    "fontSize": 14,
+                    "axisAlpha":1,
+                    "tickLength":1,
+                    "minPeriod": "DD",
+                    "dashLength": 1,
+                    "position": "bottom",
+                    "gridAlpha": 1,
+                    "dashLength": 5,
+                    "gridColor": "#DDDDDD",
+                    "axisColor": "grey",
+                    "parseDates": true
+                },
+                "legend": {
+                    "useGraphSettings": true,
+                    "position": "top",
+                    "markerDisabledColor": "#CCCCCC",
+                    "valueText": "",
+                    "useMarkerColorForLabels": true,
+                    "fontSize": 16
+                },
+                "chartCursor": {
+                    "cursorAlpha": 0.5,
+                    "cursorColor": "#F58323",
+                    "categoryBalloonEnabled": true,
+                    "categoryBalloonColor": "#303030",
+                    "color": "#FFF",
+                }
+            });
+
+            chart.write("chartdiv");
+        });
+    </script>
+{% endmacro %}

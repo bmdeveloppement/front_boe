@@ -32,3 +32,9 @@ def view_formatter(type, data, suffix=False):
     except:
         logging.exception('Error while dashboard format')
     return data
+
+
+def fill_zero_if_unset(data):
+    """Fill data with 0 if it is None"""
+    data = data if data is not None else 0
+    return data

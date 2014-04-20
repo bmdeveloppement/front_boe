@@ -75,3 +75,10 @@ class BackUtils(Singleton):
         uri = '%s/dashboard/' % (self.url_back_boe)
         return requests.post(uri, data={u'date_begin': date_begin,
                                         u'date_end': date_end})
+
+    @load_response
+    def billing(self, date_begin, date_end):
+        """Billing between two dates"""
+        uri = '%s/billing/' % (self.url_back_boe)
+        return requests.post(uri, data={u'date_begin': date_begin,
+                                        u'date_end': date_end})
