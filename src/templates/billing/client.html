@@ -5,7 +5,7 @@
     {{ render_graph(date_metrics, view_formatter) }}
 
     <div class="page-header">
-        <h3 class="float-left">Billing</h3>
+        <h3 class="float-left">Client bills</h3>
         <div class="float-right dashboard-datepicker">
             <form action="{{ url_for('billing.client') }}" name="date-form" method="get" enctype="multipart/form-data">
                 <button type="submit" class="btn btn-success float-right btn-datepicker" id="date-submit" >
@@ -37,31 +37,37 @@
         <div id="chartdiv" style="height: 250px;"></div>
     </center>
 
-    {% for client in billing['client_newspaper'].iteritems() %}
-        <h4>{{ client[1]['client_company_name'] }}</h4>
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th style="width: 250px;">Press title</th>
-                        <th>Quantity</th>
-                        <th>Turnover</th>
-                        <th>Supplier Cost</th>
-                        <th>Royalty Cost</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for press_title in client[1]['data'].iteritems() %}
+    {% for item in billing['client_newspaper'].iteritems() %}
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ item[1]['client_company_name'] }}</h3>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
                         <tr>
-                            <td>{{ press_title[1]['press_title_name'] }}</td>
-                            <td>{{ view_formatter('integer', press_title[1]['count']) }}</td>
-                            <td>{{ view_formatter('money', press_title[1]['price']) }}</td>
-                            <td>{{ view_formatter('money', press_title[1]['supplier_cost']) }}</td>
-                            <td>{{ view_formatter('money', press_title[1]['royalty_cost']) }}</td>
+                            <th style="width: 250px;">Press title</th>
+                            <th>Quantity</th>
+                            <th>Turnover</th>
+                            <th>Supplier Cost</th>
+                            <th>Royalty Cost</th>
+                            <th>Margin</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {% for sub_item in item[1]['data'].iteritems() %}
+                            <tr>
+                                <td>{{ sub_item[1]['press_title_name'] }}</td>
+                                <td>{{ view_formatter('integer', sub_item[1]['count']) }}</td>
+                                <td>{{ view_formatter('money', sub_item[1]['price']) }}</td>
+                                <td>{{ view_formatter('money', sub_item[1]['supplier_cost']) }}</td>
+                                <td>{{ view_formatter('money', sub_item[1]['royalty_cost']) }}</td>
+                                <td>{{ view_formatter('money', sub_item[1]['price'] - sub_item[1]['supplier_cost'] - sub_item[1]['royalty_cost']) }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     {% endfor %}
 {% endblock content %}

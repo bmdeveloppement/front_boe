@@ -1,0 +1,46 @@
+{% extends "container.html" %}
+
+{% block content %}
+    <div class="page-header">
+        <h3 class="float-left">Supplier bills</h3>
+        <div class="float-right dashboard-datepicker">
+            <form action="{{ url_for('billing.supplier') }}" name="date-form" method="get" enctype="multipart/form-data">
+                <button type="submit" class="btn btn-success float-right btn-datepicker" id="date-submit" >
+                    <i class="glyphicon glyphicon-ok"></i> Go !
+                </button>
+                <input type="text" class="datepicker-control" value="{{ date_end }}" data-date-format="yyyy-mm-dd" name="date_end">
+                <input type="text" class="datepicker-control" value="{{ date_begin }}" data-date-format="yyyy-mm-dd" name="date_begin">
+            </form>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    {% for item in billing.iteritems() %}
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ item[1]['supplier_company_name'] }}</h3>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Quantity</th>
+                            <th>Supplier Cost</th>
+                            <th>Royalty Cost</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ view_formatter('integer', item[1]['count']) }}</td>
+                            <td>{{ view_formatter('money', item[1]['supplier_cost']) }}</td>
+                            <td>{{ view_formatter('money', item[1]['royalty_cost']) }}</td>
+                            <td>{{ view_formatter('money', item[1]['supplier_cost'] + item[1]['royalty_cost']) }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock content %}

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 *-*
-from flask import Blueprint, render_template, session, g
+from flask import Blueprint, render_template, session, g, request
 from lib.back_utils import BackUtils
 from lib.dashboard_utils import DashboardUtils
 from lib.format_utils import view_formatter, fill_zero_if_unset
@@ -44,8 +44,42 @@ def supplier():
     """View"""
     from flask import request
 
+    # Set the current menu
+    g.active_menu = 'billing'
+
+    # Refresh date_begin and date_end
+    DashboardUtils().refresh_date_range(request)
+
+    # Get billing
+    billing = BackUtils().billing('supplier',
+                                  session['date_begin'],
+                                  session['date_end'])
+    # Render the view
+    return render_template('billing/supplier.html',
+                           view_formatter=view_formatter,
+                           date_begin=session['date_begin'],
+                           date_end=session['date_end'],
+                           billing=billing)
+
 
 @billing_bp.route('/deliverer', methods=['GET', 'POST'])
 def deliverer():
     """View"""
     from flask import request
+
+    # Set the current menu
+    g.active_menu = 'billing'
+
+    # Refresh date_begin and date_end
+    DashboardUtils().refresh_date_range(request)
+
+    # Get billing
+    billing = BackUtils().billing('deliverer',
+                                  session['date_begin'],
+                                  session['date_end'])
+    # Render the view
+    return render_template('billing/deliverer.html',
+                           view_formatter=view_formatter,
+                           date_begin=session['date_begin'],
+                           date_end=session['date_end'],
+                           billing=billing)
