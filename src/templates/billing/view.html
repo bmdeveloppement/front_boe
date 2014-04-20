@@ -36,4 +36,40 @@
     <center>
         <div id="chartdiv" style="height: 250px;"></div>
     </center>
+
+    <div class="table-responsive">
+        {% if billing['client_newspapers'] %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Press title</th>
+                    <th>Quantity</th>
+                    <th>Turnover</th>
+                    <th>Supplier Cost</th>
+                    <th>Royalty Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    <tr>
+                        {% for key in keys %}
+                            <th>{{ item[key] }}</th>
+                        {% endfor %}
+                        <td class="center">
+                            <a class="btn btn-xs btn-info" href="/{{ view }}/{{ item['id'] }}">
+                                <i class='glyphicon glyphicon-eye-open'></i> View
+                            </a>
+                            &nbsp;
+                            <a class="btn btn-xs btn-primary" href="/{{ view }}/edit/{{ item['id'] }}">
+                                <i class='glyphicon glyphicon-edit'></i> Edit
+                            </a>
+                            &nbsp;
+                            <a class="btn btn-xs btn-danger" href="/{{ view }}/delete/{{ item['id'] }}">
+                                <i class='glyphicon glyphicon-trash'></i> Delete
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 {% endblock content %}

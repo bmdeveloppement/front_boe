@@ -27,10 +27,14 @@ def view():
     # Preprocess date metrics
     date_metrics = DashboardUtils().preprocess_date_metrics(metrics)
 
+    # Get billing
+    billing = BackUtils().billing(session['date_begin'], session['date_end'])
+
     # Render the view
     return render_template('billing/view.html',
                            view_formatter=view_formatter,
                            date_begin=session['date_begin'],
                            date_end=session['date_end'],
                            global_metrics=global_metrics,
-                           date_metrics=date_metrics)
+                           date_metrics=date_metrics,
+                           billing=billing)
