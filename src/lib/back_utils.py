@@ -10,8 +10,10 @@ from lib.http_utils import load_response
 class BackUtils(Singleton):
     def __init__(self):
         """Initilize mandatories attributes"""
-        self.url_back_boe = Configurator().get_setting('application')['url_back_boe']
-        self.per_page_result = int(Configurator().get_setting('crud')['result_per_page'])
+        self.url_back_boe = Configurator() \
+            .get_setting('application')['url_back_boe']
+        self.per_page_result = int(Configurator().get_setting('crud')
+                                   ['result_per_page'])
         self.list_limit = int(Configurator().get_setting('crud')['list_limit'])
 
     @load_response
@@ -77,8 +79,8 @@ class BackUtils(Singleton):
                                         u'date_end': date_end})
 
     @load_response
-    def billing(self, date_begin, date_end):
+    def billing(self, action, date_begin, date_end):
         """Billing between two dates"""
-        uri = '%s/billing/' % (self.url_back_boe)
+        uri = '%s/billing/%s' % (self.url_back_boe, action)
         return requests.post(uri, data={u'date_begin': date_begin,
                                         u'date_end': date_end})

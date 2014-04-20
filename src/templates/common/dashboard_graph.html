@@ -7,7 +7,7 @@
             {% for date_metric in date_metrics %}
                 {
                     "date": "{{ view_formatter('date', date_metric['date']) }}",
-                    "count": "{{ view_formatter('float', date_metric['newspaper_sold']) }}",
+                    "count": "{{ view_formatter('integer', date_metric['newspaper_sold']) }}",
                     "turnover": "{{ view_formatter('float', date_metric['turnover']) }}",
                     "cost": "{{ view_formatter('float', date_metric['cost']) }}",
                     "margin": "{{ view_formatter('float', date_metric['margin']) }}",

@@ -36,7 +36,7 @@
                 {% for item in items %}
                     <tr>
                         {% for key in keys %}
-                            <th>{{ item[key] }}</th>
+                            <td>{{ item[key] }}</td>
                         {% endfor %}
                         <td class="center">
                             <a class="btn btn-xs btn-info" href="/{{ view }}/{{ item['id'] }}">
