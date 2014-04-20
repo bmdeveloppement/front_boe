@@ -38,12 +38,12 @@
     </center>
 
     {% for client in billing['client_newspaper'].iteritems() %}
-        <h4>{{ client }}</h4>
+        <h4>{{ client[1]['client_company_name'] }}</h4>
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Press title</th>
+                        <th style="width: 250px;">Press title</th>
                         <th>Quantity</th>
                         <th>Turnover</th>
                         <th>Supplier Cost</th>
@@ -51,10 +51,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for newspaper in client %}
+                    {% for press_title in client[1]['data'].iteritems() %}
                         <tr>
-                            <td>{{ newspaper }}</td>
-                            <td>{{ view_formatter('integer', newspaper) }}</td>
+                            <td>{{ press_title[1]['press_title_name'] }}</td>
+                            <td>{{ view_formatter('integer', press_title[1]['count']) }}</td>
+                            <td>{{ view_formatter('money', press_title[1]['price']) }}</td>
+                            <td>{{ view_formatter('money', press_title[1]['supplier_cost']) }}</td>
+                            <td>{{ view_formatter('money', press_title[1]['royalty_cost']) }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>

@@ -29,8 +29,6 @@ def client():
     billing = BackUtils().billing('client',
                                   session['date_begin'],
                                   session['date_end'])
-    print billing['client_newspaper']['Eucles Daily']['Barbes Tour Eiffel']
-    print billing['client_newspaper']['Eucles Daily']['Barbes Tour Eiffel'][0]['count']
     # Render the view
     return render_template('billing/client.html',
                            view_formatter=view_formatter,
